@@ -1,0 +1,483 @@
+:root { --bg: #0f1223; --bg-soft: #161a2f; --card: #1c2140; --text: #e8eaf6; --muted: #a8adc9; --primary: #6c8cff; --primary-ink: #0b1b5f; --accent: #ff6b6b; --card-radius: 12px; --card-radius-y: var(--card-radius); --border: rgba(225, 227, 236, 0.08); } /* variables globales */
+
+* { /* reset de caja */
+    box-sizing: border-box; /* incluye borde en medidas */
+}
+
+html,
+body { /* altura total de la página */
+    height: 100%; /* 100% de alto */
+}
+
+body { /* estilos globales del cuerpo */
+    margin: 0; /* sin márgenes */
+    background: linear-gradient(100deg, var(--bg), var(--bg-soft)); /* degradado de fondo */
+    color: var(--text); /* color de texto */
+    font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial; /* tipografía y tamaño base */
+    padding-top: 64px; /* compensar navbar fijo */
+}
+
+.container { /* contenedor centrado */
+    max-width: 1100px; /* ancho máximo */
+    margin: 0 auto; /* centrado horizontal */
+    padding: 0 20px; /* espaciado lateral */
+}
+
+.site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(15, 18, 35, .7); backdrop-filter: saturate(180%) blur(10px); border-bottom: 1px solid var(--border); } /* Header global */
+
+.header-inner { display: flex; align-items: center; justify-content: center; position: relative; height: 64px; } /* contenedor interno del header */
+
+.brand { font-weight: 700; letter-spacing: .3px; position: absolute; left: -170px; top: 50%; transform: translateY(-50%); } /* texto de marca */
+
+.brand-logo {
+    height: 100px; /* tamaño base del logo */
+    width: auto; /* mantener proporción */
+    vertical-align: middle; /* alinear con texto */
+    display: inline-block; /* tratamiento de caja inline */
+    margin-right: 12px; /* separación del texto */
+    margin-top: 10px; /* espacio superior */
+}
+.footer-brand .brand-logo {
+    margin-top: 20px; /* separa del texto */
+    position: relative; /* permite desplazar vertical */
+    top: 10px; /* bajar el logo */
+}
+.site-header .brand-logo {
+    height: 50px; /* tamaño del logo en navbar */
+    margin-top: 0; /* sin espacio extra arriba */
+    position: relative; /* ajuste fino vertical */
+    top: 0; /* alineado con texto */
+}
+
+.site-header .brand-logo,
+.footer-brand .brand-logo,
+.credit-logo {
+    border: 1px solid var(--primary);
+}
+
+.nav { display: flex; gap: 16px; align-items: center; position: relative; left: -6px; } /* barra de navegación */
+
+.nav-social { position: absolute; right: 59px; top: 50%; transform: translateY(-50%); display: flex; gap: 10px; z-index: 2; } /* iconos sociales en navbar derecha */
+
+.nav a { color: var(--muted); text-decoration: none; padding: 8px 10px; border-radius: 8px; } /* enlaces del menú */
+
+.nav a:hover { color: var(--text); background: rgba(255, 255, 255, .06); } /* hover enlaces */
+
+.nav .cta { background: var(--primary); color: #0b122e; font-weight: 600; } /* botón principal nav */
+
+.nav .cta:hover { filter: brightness(.95) } /* hover CTA */
+
+.hero { padding: 72px 0; margin-top: 69px; background: radial-gradient(900px 500px at 10% 10%, #26305b 0%, transparent 60%), radial-gradient(900px 500px at 90% 20%, #2a3a6f 0%, transparent 60%); position: relative; overflow: hidden; border: 1px solid var(--primary); }
+
+.hero-bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; z-index: -1; } /* video de fondo del hero */
+
+
+.hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.55); pointer-events: none; z-index: 0; } /* overlay para mejorar contraste del texto */
+
+.hero-inner { text-align: center; position: relative; z-index: 1; } /* contenedor del hero */
+
+
+
+.hero-tag { display: inline-block; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--primary); color: var(--text); font-weight: 700; letter-spacing: .5px; margin-bottom: 8px; font-size: clamp(32px, 6vw, 52px); } /* etiqueta/brand del hero */
+
+.hero h1 { font-size: clamp(28px, 4.5vw, 44px); margin: 0 0 10px; text-shadow: 0 2px 12px rgba(0,0,0,.45); } /* título hero */
+
+.hero p { font-size: clamp(18px, 3vw, 24px); line-height: 1.7; margin: 0 0 24px; color: var(--muted); text-shadow: 0 1px 8px rgba(0,0,0,.35); } /* descripción hero */
+
+.btn { display: inline-block; padding: 10px 16px; border-radius: 10px; text-decoration: none; } /* botones genéricos */
+
+.btn.primary { background: var(--primary); color: #0b122e; font-weight: 700; } /* botón primario */
+
+.btn.secondary { background: #2a315c; color: #fff; } /* botón secundario */
+
+.products { padding: 40px 0; } /* sección productos */
+
+.products h2 { margin: 0 0 16px; text-align: center; } /* título productos */
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, 200px); gap: 12px; justify-content: center; } /* grilla de productos */
+
+.card { background: none; border: 1px solid var(--primary); border-radius: var(--card-radius-tl, var(--card-radius, 12px)) var(--card-radius-tr, var(--card-radius, 12px)) var(--card-radius-br, var(--card-radius, 12px)) var(--card-radius-bl, var(--card-radius, 12px)) / var(--card-radius-tl-y, var(--card-radius-y, var(--card-radius, 12px))) var(--card-radius-tr-y, var(--card-radius-y, var(--card-radius, 12px))) var(--card-radius-br-y, var(--card-radius-y, var(--card-radius, 12px))) var(--card-radius-bl-y, var(--card-radius-y, var(--card-radius, 12px))); overflow: hidden; display: flex; flex-direction: column; } /* tarjeta producto con radios elípticos */
+
+.card h3 { font-size: clamp(14px, 2.6vw, 18px); line-height: 1.2; margin: 0; } /* título del producto más compacto */
+
+.card .add-to-cart { padding: 8px 12px; font-size: 14px; } /* botón más pequeño dentro de la tarjeta */
+
+.image-wrap { display: block; aspect-ratio: 1/1; min-height: 200px; background: none; } /* contenedor imagen */
+
+.image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: var(--card-radius-tl, var(--card-radius, 12px)) var(--card-radius-tr, var(--card-radius, 12px)) var(--card-radius-br, var(--card-radius, 12px)) var(--card-radius-bl, var(--card-radius, 12px)) / var(--card-radius-tl-y, var(--card-radius-y, var(--card-radius, 12px))) var(--card-radius-tr-y, var(--card-radius-y, var(--card-radius, 12px))) var(--card-radius-br-y, var(--card-radius-y, var(--card-radius, 12px))) var(--card-radius-bl-y, var(--card-radius-y, var(--card-radius, 12px))); } /* imagen del producto con radios elípticos */
+
+.info { padding: 10px; display: grid; gap: 6px; text-align: center; justify-items: center; } /* bloque informativo */
+
+.price { color: #a0ffc2; font-weight: 600; } /* precio */
+
+.benefits { /* sección beneficios */
+    padding: 32px 0; /* espacio */
+    background: none; /* sin fondo */
+    border-top: 2px solid var(--primary); /* borde superior */
+    border-bottom: 1px solid var(--primary); /* borde inferior */
+}
+
+.benefits h2 { /* título beneficios */
+    margin: 0 0 16px; /* separación */
+}
+
+.benefits-grid { /* grilla de beneficios */
+    display: grid; /* layout */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* columnas responsivas */
+    gap: 16px; /* separación */
+}
+
+.benefit { background: none; border: 1px solid var(--primary); border-radius: var(--card-radius); padding: 16px; } /* tarjeta beneficio */
+
+.benefit .icon { /* icono beneficio */
+    font-size: 28px; /* tamaño */
+}
+
+.contact { /* sección contacto */
+    padding: 40px 0; /* espacio */
+}
+
+.cart { /* sección carrito */
+    padding: 32px 0; /* espacio */
+}
+
+.cart h2 { /* título carrito */
+    margin: 0 0 16px; /* separación */
+}
+
+#carrito-list { /* lista del carrito */
+    list-style: none; /* sin viñetas */
+    margin: 0; /* sin margen */
+    padding: 0; /* sin padding */
+    display: grid; /* layout */
+    gap: 10px; /* separación */
+}
+
+.cart-item { /* item del carrito */
+    display: grid; /* layout */
+    grid-template-columns: 1fr auto auto; /* columnas contenido */
+    align-items: center; /* alineación vertical */
+    gap: 10px; /* separación */
+    background: var(--card); /* fondo */
+    border: 1px solid var(--border); /* borde */
+    border-radius: 12px; /* esquinas */
+    padding: 10px 12px; /* espaciado */
+}
+
+.cart-item .remove { /* botón eliminar */
+    background: var(--accent); /* fondo alerta */
+    color: #0b122e; /* texto oscuro */
+    border: none; /* sin borde */
+    padding: 8px 10px; /* espaciado */
+    border-radius: 8px; /* esquinas */
+    cursor: pointer; /* cursor mano */
+}
+
+.cart-total { /* fila total del carrito */
+    display: flex; /* layout */
+    justify-content: flex-end; /* alinear a la derecha */
+    gap: 10px; /* separación */
+    align-items: baseline; /* alinear baselines */
+    margin-top: 8px; /* espacio superior */
+}
+
+.cart-actions { /* acciones del carrito */
+    display: flex; /* layout */
+    gap: 10px; /* separación */
+    margin-top: 10px; /* espacio superior */
+}
+
+.payment { /* sección pago */
+    padding: 32px 0; /* espacio */
+    background: none; /* sin fondo a ancho completo */
+    border-top: 1px solid var(--primary); /* borde superior azul */
+    scroll-margin-top: 72px; /* compensar navbar fijo al navegar por ancla */
+    position: relative; /* para pseudo-elemento */
+}
+
+
+.payment .container { /* layout de dos columnas */
+    max-width: 1100px; /* ancho amplio para dos cajas */
+    margin: 0 auto; /* centrar contenedor */
+    position: relative; /* stacking */
+    z-index: 1; /* encima */
+    display: grid; /* dos columnas */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 cols */
+    gap: 24px; /* espacio entre fondos */
+    align-items: stretch; /* igualar alturas de cajas */
+}
+
+.payment-box, .contact-box { background: rgba(255, 255, 255, .03); border: 1px solid var(--primary); border-radius: var(--card-radius); padding: 16px; height: 100%; scroll-margin-top: 72px; } /* cajas con fondo suave */
+
+@media (max-width: 640px) { /* móviles: ancho completo y columnas apiladas */
+    .payment .container { max-width: 100%; margin-left: 0; margin-right: 0; grid-template-columns: 1fr; gap: 16px; }
+}
+
+.payment h2 { /* título pago */
+    margin: 0 0 12px; /* separación */
+}
+
+.field-group { /* grupo de campo */
+    display: grid; /* layout */
+    gap: 6px; /* separación */
+    margin: 10px 0; /* margen vertical */
+}
+
+.field-row { /* fila de campos */
+    display: grid; /* layout */
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* columnas responsivas */
+    gap: 12px; /* separación */
+}
+
+.field-group input[type="text"],
+.field-group input[type="password"],
+.field-group input[type="email"],
+.field-group textarea { /* inputs y textarea */
+    width: 100%; /* ancho completo */
+    padding: 10px 12px; /* espaciado */
+    border-radius: 10px; /* esquinas */
+    border: 1px solid var(--border); /* borde */
+    background: #2a315c; /* fondo */
+    color: var(--text); /* texto */
+}
+
+.field-group textarea { /* ajustes de textarea */
+    min-height: 120px; /* alto mínimo */
+    resize: vertical; /* permitir redimensionar vertical */
+}
+
+.choices { /* opciones radio */
+    display: flex; /* layout */
+    align-items: center; /* alineación vertical */
+    gap: 16px; /* separación */
+}
+
+.site-footer { /* área del pie */
+    position: relative; /* para posicionar decoraciones y botón */
+    border-top: 1px solid var(--border); /* borde superior */
+    padding: 44px 0 52px; /* base global estable */
+    color: var(--muted); /* color de texto base */
+    background: linear-gradient(180deg, rgba(108, 140, 255, .06), rgba(108, 140, 255, .12)); /* fondo suave azul */
+    backdrop-filter: saturate(180%) blur(12px); /* efecto glass */
+}
+
+.site-footer::before { /* barra de acento superior */
+    content: ""; /* pseudo elemento */
+    position: absolute; /* posicionamiento */
+    top: 0; /* arriba */
+    left: 0; right: 0; /* a lo largo */
+    height: 4px; /* grosor */
+    background: linear-gradient(90deg, var(--primary), #9aa8ff, var(--primary)); /* gradiente azul */
+    opacity: .6; /* transparencia */
+}
+
+.footer-inner { /* panel interior del footer */
+    display: grid; /* layout de columnas */
+    gap: 18px; /* separación entre áreas */
+    align-items: center; /* alineación vertical */
+    text-align: center; /* por defecto centrado */
+    background: none; /* fondo translúcido */
+    border: 9px solid var(--border); /* borde suave */
+    border-radius: 36px; /* esquinas redondeadas */
+    padding: 20px; /* espaciado interno */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .25); /* sombra */
+}
+
+.footer-brand { /* columna de marca en footer */
+    display: grid; /* layout grid */
+    grid-template-columns: auto 1fr; /* insignia + textos */
+    align-items: center; /* centro vertical */
+    gap: 12px; /* separación */
+}
+
+.brand-badge { /* insignia con gradiente */
+    width: 48px; /* ancho */
+    height: 48px; /* alto */
+    border-radius: 12px; /* esquinas */
+    display: grid; /* centrar contenido */
+    place-items: center; /* centrado */
+    font-weight: 700; /* peso */
+    color: #0b122e; /* tinta */
+    background: linear-gradient(135deg, #f2d2b6, #9fd2c8); /* gradiente */
+    border: 1px solid var(--border); /* borde */
+}
+
+.brand-name { /* nombre marca */
+    font-weight: 1000; /* negrita */
+    color: var(--text); /* color */
+}
+
+.brand-sub { /* subtítulo marca */
+    grid-column: 1 / -1; /* ocupar ancho */
+    font-size: 17px; /* tamaño */
+    color: var(--muted); /* color atenuado */
+}
+
+.section-title { /* títulos de columna */
+    font-weight: 700; /* negrita */
+    color: var(--text); /* color */
+    margin-bottom: -10px; /* separación */
+}
+
+.contact-row a { color: var(--text); text-decoration: underline; }
+
+.social { /* contenedor social */
+    display: flex; /* fila */
+    gap: 10px; /* separación */
+    justify-content: center; /* centrado */
+    flex-wrap: wrap; /* salto de línea */
+}
+
+.social.round a { /* botones sociales circulares */
+    width: 36px; /* ancho */
+    height: 36px; /* alto */
+    padding: 0; /* sin relleno extra */
+    border-radius: 999px; /* círculo */
+    display: inline-flex; /* centrar contenido */
+    align-items: center; /* centrado vertical */
+    justify-content: center; /* centrado horizontal */
+    line-height: 1; /* evitar desajustes verticales */
+}
+
+.social a { /* botón social pill */
+    display: inline-flex; /* inline flex */
+    align-items: center; /* centro vertical */
+    gap: 10px; /* separación icono-texto */
+    padding: 10px 14px; /* espaciado */
+    border-radius: 999px; /* pill */
+    background: rgba(255, 255, 255, .06); /* fondo */
+    border: 1px solid var(--border); /* borde */
+    color: var(--text); /* texto */
+    text-decoration: none; /* sin subrayado */
+    font-weight: 600; /* peso */
+    transition: background .2s ease, transform .2s ease, box-shadow .2s ease; /* transiciones */
+}
+
+.social a:hover { /* hover social pill */
+    background: rgba(255, 255, 255, .12); /* fondo */
+    transform: translateY(-1px); /* leve elevación */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .25); /* sombra */
+}
+
+.social a:nth-child(1) { /* acento Facebook */
+    box-shadow: inset 0 0 0 1px rgba(108, 140, 255, .35); /* anillo */
+}
+.social a:nth-child(2) { /* acento Instagram */
+    box-shadow: inset 0 0 0 1px rgba(255,107,181,.35); /* anillo */
+}
+.social a:nth-child(3) { /* acento WhatsApp */
+    box-shadow: inset 0 0 0 1px rgba(66, 220, 116, .35); /* anillo */
+}
+.social a:nth-child(4) { /* acento X */
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .35); /* anillo */
+}
+
+.social .icon { width: 20px; height: 20px; display: inline-block; flex-shrink: 0; } /* icono SVG */
+
+.footer-legal { display: grid; gap: 6px; } /* columna legal */
+.footer-legal a { text-decoration: none; color: var(--muted); } /* enlace legal */
+.footer-legal a:hover { color: var(--text); } /* hover legal */
+
+.footer-legal { margin-top: -500px; }
+
+.legal { /* bloque legal común */
+    display: grid; /* layout */
+    gap: 6px; /* separación */
+    justify-items: center; /* centrado */
+}
+
+.copyright { /* copyright */
+    color: var(--text); /* color */
+    margin-top: 60px; /* colocarlo más abajo que el copyright */
+}
+
+.links a { /* enlace dentro de links */
+    color: var(--muted); /* color base */
+    text-decoration: none; /* sin subrayado */
+    border-bottom: 1px dotted transparent; /* subrayado punteado */
+    transition: color .2s ease, border-color .2s ease; /* transiciones */
+}
+
+.links a:hover { /* hover enlaces dentro de links */
+    color: var(--text); /* color activo */
+    border-color: var(--border); /* mostrar subrayado */
+}
+
+.links { /* contenedor links */
+    display: flex; /* fila */
+    gap: 12px; /* separación */
+    justify-content: center; /* centrado */
+}
+
+.credit { /* línea de crédito */
+    font-size: 16px; /* tamaño */
+    color: var(--muted); /* color */
+    text-align: center; /* centrar texto */
+    margin-top: 10px; /* colocarlo más abajo que el copyright */
+}
+.credit a { /* enlace del crédito */
+    color: var(--text); /* color */
+    text-decoration: none; /* sin subrayado */
+    border-bottom: 1px solid transparent; /* línea inferior */
+    transition: border-color .2s ease; /* transición */
+}
+.credit a:hover { /* hover del crédito */
+    border-color: var(--border); /* mostrar línea */
+}
+.credit-logo {
+    height: 90px; /* tamaño del logo crédito */
+    width: auto; /* mantener proporción */
+    vertical-align: middle; /* alinear con texto */
+    margin-right: 8px; /* separación del texto */
+    display: inline-block; /* inline con control de box */
+}
+
+@media (min-width: 720px) { /* estilos desktop */
+    .footer-inner {
+        grid-template-columns: 1.4fr 1fr 1fr; /* 3 columnas */
+        grid-template-areas: "brand contact bottom" "legal legal legal"; /* bottom arriba, legal abajo */
+        text-align: initial; /* texto por defecto */
+        align-items: start; /* arriba */
+    }
+    .footer-brand { grid-area: brand; display: grid; justify-items: start; text-align: left; } /* área marca */
+    .footer-contact { grid-area: contact; display: grid; justify-items: center; text-align: center; } /* área contacto */
+    .footer-legal { grid-area: legal; display: grid; justify-items: end; text-align: right; } /* área legal */
+    .footer-bottom { grid-area: bottom; } /* área superior */
+    .links {
+        justify-content: center; /* centrar */
+}
+    .footer-legal { margin-top: -170px; } /* subir el aviso legales */
+}
+
+@media (max-width:560px) { /* estilos móviles */
+    .header-inner { height: auto; padding: 12px 0; gap: 8px; flex-wrap: wrap }
+    .brand { position: static; left: auto; top: auto; transform: none; display: block; text-align: center; margin-bottom: 8px }
+    .nav { flex-wrap: wrap; width: 100%; justify-content: center; gap: 10px }
+    .nav a { padding: 6px 8px }
+    .nav-social { position: static; right: auto; top: auto; transform: none; margin-top: 8px; justify-content: center }
+    .hero { margin-top: 32px }
+    .grid { grid-template-columns: 1fr; gap: 10px }
+    .footer-brand { grid-template-columns: 1fr; justify-items: center; text-align: center }
+    .footer-bottom { margin-top: 10px }
+    .back-to-top { right: 22px; bottom: 22px }
+}
+@media (min-width:561px) and (max-width:840px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        justify-content: center
+    }
+}
+.back-to-top { position: fixed; right: 89px; bottom: 81px; width: 42px; height: 42px; line-height: 42px; border-radius: 999px; display: grid; place-items: center; background: var(--primary); color: #0b122e; text-decoration: none; font-weight: 900; font-size: 28px; box-shadow: 0 12px 24px rgba(0,0,0,.25); border: 1px solid var(--border); z-index: 60; } /* botón volver arriba */
+
+.back-to-top:hover { filter: brightness(.95) } /* hover volver arriba */
+
+.footer-bottom { /* fila inferior del footer */
+    grid-column: 1 / -1; /* ocupar ancho */
+    display: grid; /* layout */
+    gap: 6px; /* separación */
+    justify-items: center; /* centrado */
+    margin-top: 16px; /* más separación superior */
+    margin-bottom: 12px; /* separación inferior */
+}
+#site-footer .footer-bottom { margin-top: -24px; margin-bottom: 12px }
+#site-footer-catalogo .footer-bottom { margin-top: -24px; margin-bottom: 12px }
